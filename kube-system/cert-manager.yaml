@@ -1,0 +1,133 @@
+# helm repo add jetstack https://charts.jetstack.io
+# helm repo update
+# helm fetch 'jetstack/cert-manager'
+# helm template --namespace kube-system --name cert-manager --set webhook.enabled=false --set cainjector.enabled=false cert-manager-v0.7.1.tgz
+---
+# Source: cert-manager/templates/serviceaccount.yaml
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: cert-manager
+  namespace: kube-system
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+---
+# Source: cert-manager/templates/rbac.yaml
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: cert-manager
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+rules:
+  - apiGroups: ["certmanager.k8s.io"]
+    resources: ["certificates", "certificates/finalizers", "issuers", "clusterissuers", "orders", "orders/finalizers", "challenges"]
+    verbs: ["*"]
+  - apiGroups: [""]
+    resources: ["configmaps", "secrets", "events", "services", "pods"]
+    verbs: ["*"]
+  - apiGroups: ["extensions"]
+    resources: ["ingresses"]
+    verbs: ["*"]
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager
+subjects:
+  - name: cert-manager
+    namespace: kube-system
+    kind: ServiceAccount
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-view
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+    rbac.authorization.k8s.io/aggregate-to-view: "true"
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups: ["certmanager.k8s.io"]
+    resources: ["certificates", "issuers"]
+    verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cert-manager-edit
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+    rbac.authorization.k8s.io/aggregate-to-edit: "true"
+    rbac.authorization.k8s.io/aggregate-to-admin: "true"
+rules:
+  - apiGroups: ["certmanager.k8s.io"]
+    resources: ["certificates", "issuers"]
+    verbs: ["create", "delete", "deletecollection", "patch", "update"]
+---
+# Source: cert-manager/templates/deployment.yaml
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: cert-manager
+  namespace: kube-system
+  labels:
+    app: cert-manager
+    chart: cert-manager-v0.7.1
+    release: cert-manager
+    heritage: Tiller
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cert-manager
+      release: cert-manager
+  template:
+    metadata:
+      labels:
+        app: cert-manager
+        release: cert-manager
+      annotations:
+        prometheus.io/path: "/metrics"
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '9402'
+    spec:
+      serviceAccountName: cert-manager
+      containers:
+        - name: cert-manager
+          image: "quay.io/jetstack/cert-manager-controller:v0.7.1"
+          imagePullPolicy: IfNotPresent
+          args:
+          - --cluster-resource-namespace=$(POD_NAMESPACE)
+          - --leader-election-namespace=$(POD_NAMESPACE)
+          ports:
+          - containerPort: 9402
+          env:
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
+          resources:
+            {}
