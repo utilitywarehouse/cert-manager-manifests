@@ -8,10 +8,10 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cert-manager
-  namespace: kube-system
+  namespace: "kube-system"
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
 ---
@@ -22,7 +22,7 @@ metadata:
   name: cert-manager
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
 rules:
@@ -42,7 +42,7 @@ metadata:
   name: cert-manager
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
 roleRef:
@@ -51,7 +51,7 @@ roleRef:
   name: cert-manager
 subjects:
   - name: cert-manager
-    namespace: kube-system
+    namespace: "kube-system"
     kind: ServiceAccount
 ---
 apiVersion: rbac.authorization.k8s.io/v1
@@ -60,7 +60,7 @@ metadata:
   name: cert-manager-view
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
     rbac.authorization.k8s.io/aggregate-to-view: "true"
@@ -77,7 +77,7 @@ metadata:
   name: cert-manager-edit
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
     rbac.authorization.k8s.io/aggregate-to-edit: "true"
@@ -92,10 +92,10 @@ apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
   name: cert-manager
-  namespace: kube-system
+  namespace: "kube-system"
   labels:
     app: cert-manager
-    chart: cert-manager-v0.7.1
+    chart: cert-manager-v0.7.2
     release: cert-manager
     heritage: Tiller
 spec:
@@ -117,7 +117,7 @@ spec:
       serviceAccountName: cert-manager
       containers:
         - name: cert-manager
-          image: "quay.io/jetstack/cert-manager-controller:v0.7.1"
+          image: "quay.io/jetstack/cert-manager-controller:v0.7.2"
           imagePullPolicy: IfNotPresent
           args:
           - --cluster-resource-namespace=$(POD_NAMESPACE)
