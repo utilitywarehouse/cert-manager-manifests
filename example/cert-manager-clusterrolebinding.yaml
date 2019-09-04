@@ -15,7 +15,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -37,7 +37,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -59,7 +59,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -81,7 +81,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -103,7 +103,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -125,7 +125,7 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
 
 ---
@@ -147,5 +147,5 @@ roleRef:
 subjects:
   - name: cert-manager
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: "default"
+    namespace: "example"
     kind: ServiceAccount
