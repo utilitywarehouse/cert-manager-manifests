@@ -15,7 +15,8 @@ go get -u sigs.k8s.io/kustomize
 
 ## Upstream Manifests
 
-the proposed [way](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html) is using helm to generate manifests from upstream 
+the proposed [way](https://docs.cert-manager.io/en/latest/getting-started/install/kubernetes.html) is using helm to generate manifests from upstream.
+We are using `kube-system` as the default namespace for deploying cert-manager, etc: 
 
 ```
 helm repo add jetstack https://charts.jetstack.io
