@@ -5,7 +5,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -19,7 +19,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -27,7 +26,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -41,7 +40,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -49,7 +47,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -63,7 +61,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -71,7 +68,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -85,7 +82,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -93,7 +89,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -107,7 +103,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -115,7 +110,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -129,7 +124,6 @@ subjects:
     kind: ServiceAccount
 
 ---
-
 apiVersion: rbac.authorization.k8s.io/v1beta1
 kind: ClusterRoleBinding
 metadata:
@@ -137,7 +131,7 @@ metadata:
   labels:
     app: cert-manager
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/instance:  cert-manager
+    app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Tiller
     helm.sh/chart: cert-manager-v0.9.1
 roleRef:
@@ -146,6 +140,27 @@ roleRef:
   name: cert-manager-controller-ingress-shim
 subjects:
   - name: cert-manager
+    # Placeholder, patch with the namespace value of Deployment/ServiceAccount
+    namespace: "example"
+    kind: ServiceAccount
+
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: cert-manager-cainjector
+  labels:
+    app: cainjector
+    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/instance: cert-manager
+    app.kubernetes.io/managed-by: Tiller
+    helm.sh/chart: cainjector-v0.9.1
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cert-manager-cainjector
+subjects:
+  - name: cert-manager-cainjector
     # Placeholder, patch with the namespace value of Deployment/ServiceAccount
     namespace: "example"
     kind: ServiceAccount
