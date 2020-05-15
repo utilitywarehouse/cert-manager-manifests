@@ -6,3 +6,6 @@ bases:
 resources:
   - cert-manager-clusterrolebinding.yaml
   - cert-manager-rolebinding.yaml
+patchesStrategicMerge:
+  - cert-manager-crd-patch.yaml
+  - cert-manager-webhook-patch.yaml
