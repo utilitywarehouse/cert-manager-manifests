@@ -5,3 +5,4 @@ bases:
   - ../namespaced
 resources:
   - cert-manager-clusterrolebinding.yaml
+  - cert-manager-rolebinding.yaml

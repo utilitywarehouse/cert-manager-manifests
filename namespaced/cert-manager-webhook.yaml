@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: cert-manager-webhook
-  namespace: "cert-manager"
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
@@ -15,7 +14,6 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cert-manager-webhook
-  namespace: "cert-manager"
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
@@ -38,7 +36,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cert-manager-webhook
-  namespace: "cert-manager"
   labels:
     app: webhook
     app.kubernetes.io/name: webhook
@@ -71,7 +68,7 @@ spec:
           args:
           - --v=2
           - --secure-port=10250
-          - --dynamic-serving-ca-secret-namespace=cert-manager
+          - --dynamic-serving-ca-secret-namespace=$(POD_NAMESPACE)
           - --dynamic-serving-ca-secret-name=cert-manager-webhook-ca
           - --dynamic-serving-dns-names=cert-manager-webhook,cert-manager-webhook.cert-manager,cert-manager-webhook.cert-manager.svc
           ports:
