@@ -2,6 +2,8 @@ apiVersion: admissionregistration.k8s.io/v1beta1
 kind: MutatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
+  annotations:
+    cert-manager.io/inject-ca-from-secret: "example/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     clientConfig:
@@ -14,6 +16,8 @@ apiVersion: admissionregistration.k8s.io/v1beta1
 kind: ValidatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
+  annotations:
+    cert-manager.io/inject-ca-from-secret: "example/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     clientConfig:

@@ -108,7 +108,7 @@ metadata:
     app.kubernetes.io/component: "webhook"
     helm.sh/chart: cert-manager-v0.15.0
   annotations:
-    cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-ca"
+    cert-manager.io/inject-ca-from-secret: "patch-namespace/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     rules:
@@ -144,7 +144,7 @@ metadata:
     app.kubernetes.io/component: "webhook"
     helm.sh/chart: cert-manager-v0.15.0
   annotations:
-    cert-manager.io/inject-ca-from-secret: "cert-manager/cert-manager-webhook-ca"
+    cert-manager.io/inject-ca-from-secret: "patch-namespace/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     namespaceSelector:
