@@ -22,7 +22,7 @@ the proposed [way](https://docs.cert-manager.io/en/latest/getting-started/instal
 helm repo add jetstack https://charts.jetstack.io
 helm repo update
 helm fetch 'jetstack/cert-manager'
-helm template --namespace kube-system --name cert-manager --set webhook.enabled=false cert-manager-v0.9.1.tgz
+helm template --namespace kube-system --name cert-manager --set featureGates=ExperimentalCertificateControllers=true cert-manager-v0.15.1.tgz
 ```
 
 In order to properly update the base one should roughly follow the below steps
