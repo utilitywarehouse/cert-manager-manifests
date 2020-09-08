@@ -3,9 +3,4 @@ kind: Kustomization
 resources:
   - cert-manager-webhook.yaml
   - clusterroles.yaml
-  - crd-certificaterequests.yaml
-  - crd-certificates.yaml
-  - crd-challenges.yaml
-  - crd-clusterissuers.yaml
-  - crd-issuers.yaml
-  - crd-orders.yaml
+  - crd.yaml

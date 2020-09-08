@@ -1,69 +1,89 @@
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: cert-manager-cainjector:leaderelection
   labels:
     app: cainjector
-    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: "cainjector"
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: cainjector
+  name: cert-manager-cainjector:leaderelection
 rules:
   # Used for leader election by the controller
   # cert-manager-cainjector-leader-election is used by the CertificateBased injector controller
   #   see cmd/cainjector/start.go#L113
   # cert-manager-cainjector-leader-election-core is used by the SecretBased injector controller
   #   see cmd/cainjector/start.go#L137
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    resourceNames: ["cert-manager-cainjector-leader-election", "cert-manager-cainjector-leader-election-core"]
-    verbs: ["get", "update", "patch"]
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["create"]
+- apiGroups:
+  - ""
+  resourceNames:
+  - cert-manager-cainjector-leader-election
+  - cert-manager-cainjector-leader-election-core
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
 ---
-# Source: cert-manager/templates/rbac.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: cert-manager:leaderelection
   labels:
     app: cert-manager
-    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: "controller"
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: cert-manager
+  name: cert-manager:leaderelection
 rules:
   # Used for leader election by the controller
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    resourceNames: ["cert-manager-controller"]
-    verbs: ["get", "update", "patch"]
-  - apiGroups: [""]
-    resources: ["configmaps"]
-    verbs: ["create"]
+- apiGroups:
+  - ""
+  resourceNames:
+  - cert-manager-controller
+  resources:
+  - configmaps
+  verbs:
+  - get
+  - update
+  - patch
+- apiGroups:
+  - ""
+  resources:
+  - configmaps
+  verbs:
+  - create
 ---
-# Source: cert-manager/templates/webhook-rbac.yaml
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: cert-manager-webhook:dynamic-serving
   labels:
     app: webhook
-    app.kubernetes.io/name: webhook
+    app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: "webhook"
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: webhook
+  name: cert-manager-webhook:dynamic-serving
 rules:
-- apiGroups: [""]
-  resources: ["secrets"]
+- apiGroups:
+  - ""
   resourceNames:
-  - 'cert-manager-webhook-ca'
-  verbs: ["get", "list", "watch", "update"]
+  - cert-manager-webhook-ca
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+  - update
 # It's not possible to grant CREATE permission on a single resourceName.
-- apiGroups: [""]
-  resources: ["secrets"]
-  verbs: ["create"]
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - create
