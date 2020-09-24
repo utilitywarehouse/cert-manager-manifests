@@ -1,64 +1,58 @@
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: cert-manager-cainjector:leaderelection
   labels:
     app: cainjector
-    app.kubernetes.io/name: cainjector
+    app.kubernetes.io/component: cainjector
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: 'cainjector'
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: cainjector
+  name: cert-manager-cainjector:leaderelection
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: cert-manager-cainjector:leaderelection
 subjects:
-  - kind: ServiceAccount
-    name: cert-manager-cainjector
-    # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: 'example'
+- kind: ServiceAccount
+  name: cert-manager-cainjector
+  # Placeholder, patch with the namespace value of Deployment/ServiceAccount
+  namespace: example
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: cert-manager:leaderelection
   labels:
     app: cert-manager
-    app.kubernetes.io/name: cert-manager
+    app.kubernetes.io/component: controller
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: 'controller'
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: cert-manager
+  name: cert-manager:leaderelection
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: cert-manager:leaderelection
 subjects:
-  - apiGroup: ''
-    kind: ServiceAccount
-    name: cert-manager
-    # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: 'example'
+- apiGroup: ""
+  kind: ServiceAccount
+  name: cert-manager
+  # Placeholder, patch with the namespace value of Deployment/ServiceAccount
+  namespace: example
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: cert-manager-webhook:dynamic-serving
   labels:
     app: webhook
-    app.kubernetes.io/name: webhook
+    app.kubernetes.io/component: webhook
     app.kubernetes.io/instance: cert-manager
-    app.kubernetes.io/managed-by: Helm
-    app.kubernetes.io/component: 'webhook'
-    helm.sh/chart: cert-manager-v0.15.0
+    app.kubernetes.io/name: webhook
+  name: cert-manager-webhook:dynamic-serving
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: cert-manager-webhook:dynamic-serving
 subjects:
-  - apiGroup: ''
-    kind: ServiceAccount
-    name: cert-manager-webhook
-    # Placeholder, patch with the namespace value of Deployment/ServiceAccount
-    namespace: 'example'
+- apiGroup: ""
+  kind: ServiceAccount
+  name: cert-manager-webhook
+  # Placeholder, patch with the namespace value of Deployment/ServiceAccount
+  namespace: example
