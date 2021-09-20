@@ -72,5 +72,7 @@ spec:
         ports:
         - containerPort: 9402
           protocol: TCP
-        resources: {}
+        resources:
+          limits:
+            memory: 300Mi
       serviceAccountName: cert-manager
