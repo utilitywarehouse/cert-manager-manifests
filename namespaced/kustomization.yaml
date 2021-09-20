@@ -5,3 +5,5 @@ resources:
   - cert-manager-webhook.yaml
   - cert-manager.yaml
   - rbac.yaml
+patchesStrategicMerge:
+  - cert-manager-patch.yaml
