@@ -1,0 +1,11 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - upstream-cert-manager.yaml
+patchesStrategicMerge:
+  - patches/cert-manager-deployment-flags-ns-patch.yaml
+  - patches/clusterrolebinding-ns-patch.yaml
+  - patches/crd-inject-ca-ns-patch.yaml
+  - patches/delete-cert-manager-ns-patch.yaml
+  - patches/rolebinding-ns-patch.yaml
+  - patches/webhook-ns-patch.yaml

@@ -3,7 +3,7 @@ kind: MutatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
   annotations:
-    cert-manager.io/inject-ca-from-secret: "example/cert-manager-webhook-ca"
+    cert-manager.io/inject-ca-from-secret: "kube-system/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     clientConfig:
@@ -17,7 +17,7 @@ kind: ValidatingWebhookConfiguration
 metadata:
   name: cert-manager-webhook
   annotations:
-    cert-manager.io/inject-ca-from-secret: "example/cert-manager-webhook-ca"
+    cert-manager.io/inject-ca-from-secret: "kube-system/cert-manager-webhook-ca"
 webhooks:
   - name: webhook.cert-manager.io
     clientConfig:
