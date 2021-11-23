@@ -7,4 +7,4 @@ towards that.
 ## updating
 
 1. Update version inside Makefile
-2. Run `get-yaml` to update the upstream manifest
+2. Run `make get-yaml` to update the upstream manifest
