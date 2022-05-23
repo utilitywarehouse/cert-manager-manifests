@@ -7,7 +7,6 @@ patchesStrategicMerge:
   - patches/cert-manager-deployment-flags-ns-patch.yaml
   - patches/cert-manager-deployment-resource-patch.yaml
   - patches/clusterrolebinding-ns-patch.yaml
-  - patches/crd-inject-ca-ns-patch.yaml
   - patches/delete-cert-manager-ns-patch.yaml
   - patches/rolebinding-ns-patch.yaml
   - patches/webhook-deployment-resource-patch.yaml
