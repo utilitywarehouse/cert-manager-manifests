@@ -1,4 +1,4 @@
-version=v1.9.1
+version=v1.11.1
 
 # replace all namespace references with "kube-system", this works since we
 # deploy all resources under "kube-system"
