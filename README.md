@@ -1,3 +1,5 @@
+Moved under [system-manifests repo](https://github.com/utilitywarehouse/system-manifests/tree/master/cert-manager)
+
 # cert-manager manifests
 
 This is an opinionated Kustomize deployment of cert-manager. We run everything
